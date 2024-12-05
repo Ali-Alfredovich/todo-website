@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/diss.css">
+    <title>TODO-list</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">TO-DO List</h1>
+
+        <!-- Список задач -->
+        <ul>
+            {% for task in tasks %}
+            <li>
+                <input 
+                    type="checkbox" 
+                    id="task-{{ loop.index }}" 
+                    onchange="toggleTask('task-{{ loop.index }}')" 
+                />
+                <label for="task-{{ loop.index }}" class="task-label">
+                    {{ loop.index }}. {{ task.task }}
+                </label>
+                <form method="post" style="display: inline;">
+                    <button type="submit" name="delete_task" value="{{ loop.index }}">Удалить</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Форма для добавления задачи -->
+        <form method="post">
+            <input type="text" name="task" placeholder="Введите новую задачу" required>
+            <button type="submit">Добавить</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleTask(taskId) {
+            const label = document.querySelector(label[for="${taskId}"]);
+            if (label) {
+                label.classList.toggle('completed');
+            }
+        }
+    </script>
+</body>
+</html>
